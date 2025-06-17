@@ -1,0 +1,101 @@
+@page
+@model DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+@{
+    var name = User.Identity?.Name?.Trim();
+    var firstName = name?.Split(' ')[0];
+}
+
+<div class="d-flex g-6 pt-4 mb-5 justify-content-between">
+    <span class="fs-4">Welcome Again, <strong>@firstName</strong> 🎉</span>
+    <div class="d-flex gap-2">
+        <button class="btn btn-dark rounded-pill"><i class="bi bi-plus"></i>Add product</button>
+        <button class="btn btn-dark rounded-pill"><i class="bi bi-plus"></i>Add user</button>
+    </div>
+</div>
+
+<div class="row g-6 mb-5">
+    <div class="col-xl-4 col-sm-7 col-12">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total Products</span>
+                        <span class="h3 font-bold mb-0">0</span>
+                    </div>
+                </div>
+                <div class="mt-2 mb-0 text-sm">
+                    <span class="badge badge-pill bg-soft-success text-success me-2">
+                        <i class="bi bi-arrow-up me-1"></i>13%
+                    </span>
+                    <span class="text-nowrap text-xs text-muted">Since last month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-7 col-12">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">
+                            New products in last hour
+                        </span>
+                        <span class="h3 font-bold mb-0">215</span>
+                    </div>
+                </div>
+                <div class="mt-2 mb-0 text-sm">
+                    <span class="badge badge-pill bg-soft-success text-success me-2">
+                        <i class="bi bi-arrow-up me-1"></i>30%
+                    </span>
+                    <span class="text-nowrap text-xs text-muted">Since last month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-sm-7 col-12">
+        <div class="card shadow border-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <span class="h6 font-semibold text-muted text-sm d-block mb-2">Total users</span>
+                        <span class="h3 font-bold mb-0">1</span>
+                    </div>
+                </div>
+                <div class="mt-2 mb-0 text-sm">
+                    <span class="badge badge-pill bg-soft-danger text-danger me-2">
+                        <i class="bi bi-arrow-down me-1"></i>-5%
+                    </span>
+                    <span class="text-nowrap text-xs text-muted">Since last month</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row g-6 mb-5">
+    <span class="h3">Users</span>
+    <canvas id="productsChart" height="400"></canvas>
+</div>
+
+
+@section Scripts {
+    <script>
+        const ctx = document.getElementById('productsChart').getContext('2d');
+        const productsChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['12AM', '1AM', '2AM', '3AM', '4AM', '5AM'],
+                datasets: [{
+                    label: 'Users',
+                    data: [12, 19, 3, 5, 2, 3],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    tension: 0.5,
+                }]
+            },
+        });
+    </script>
+}

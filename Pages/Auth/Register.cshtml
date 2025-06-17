@@ -1,0 +1,32 @@
+@page
+@model Auth.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <form method="post" class="p-4 rounded shadow" style="min-width: 300px; max-width: 400px; width: 100%;">
+        <h2 class="mb-4 text-center">Register</h2>
+        @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+        {
+            <div class="alert alert-danger" role="alert">
+                @Model.ErrorMessage
+            </div>
+        }
+        <div class="mb-3">
+            <input type="text" asp-for="Name" class="form-control" placeholder="Name" required />
+        </div>
+        <div class="mb-3">
+            <input type="email" asp-for="Email" class="form-control" placeholder="Email" required />
+        </div>
+        <div class="mb-3">
+            <input type="password" asp-for="Password" class="form-control" placeholder="Password" required />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Register</button>
+        <p class="mt-3 text-center">
+            Already have an account?
+            <a href="/Auth/Login">Login</a>
+        </p>
+    </form>
+</div>
