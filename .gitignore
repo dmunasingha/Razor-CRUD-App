@@ -68,3 +68,5 @@ ehthumbs.db
 # Ignore only generated files, not the whole wwwroot
 wwwroot/lib/
 wwwroot/js/bundle.js
+
+publish/
