@@ -1,15 +1,21 @@
+using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using RazorCrudApp.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Load environment variables from .env
+Env.Load();
+
+// Now you can access it using Environment.GetEnvironmentVariable
+string? connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
+
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-
 builder.Services.AddRazorPages();
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.AddAuthentication("MyCookieAuth")
     .AddCookie("MyCookieAuth", options =>
